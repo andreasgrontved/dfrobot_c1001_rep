@@ -3,7 +3,6 @@ import esphome.config_validation as cv
 from esphome.components import uart
 from esphome.const import CONF_ID
 
-# This component depends on the UART component.
 DEPENDENCIES = ["uart"]
 AUTO_LOAD = ["uart"]
 
@@ -18,6 +17,6 @@ CONFIG_SCHEMA = cv.Schema({
 }).extend(cv.COMPONENT_SCHEMA).extend(uart.UART_DEVICE_SCHEMA)
 
 def to_code(config):
-    # Create a new instance of your component using the UART device from the configuration.
+    # Create an instance of the component using the UART device.
     var = cg.new_Pvariable(config[CONF_ID], uart.get_uart_device(config))
     cg.add(var.set_update_interval(1000))
