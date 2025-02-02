@@ -16,7 +16,8 @@ CONFIG_SCHEMA = cv.Schema({
     cv.GenerateID(): cv.declare_id(DFRobotC1001Component),
 }).extend(cv.COMPONENT_SCHEMA).extend(uart.UART_DEVICE_SCHEMA)
 
-def to_code(config):
+async def to_code(config):
     # Create an instance of your component using the UART device.
-    var = cg.new_Pvariable(config[CONF_ID], uart.get_uart_device(config))
-    cg.add(var.set_update_interval(1000))
+    var = cg.new_Pvariable(config[CONF_ID], await cg.get_variable(config[CONF_ID]))
+    await cg.register_component(var, config)
+    await uart.register_uart_device(var, config)
