@@ -8,9 +8,8 @@ static const char *TAG = "dfrobot_c1001";
 
 void DFRobotC1001Component::setup() {
   ESP_LOGI(TAG, "Initializing DFRobot C1001 Sensor...");
-  // Create the sensor object using the underlying UART component.
-  // We assume that uart_parent_ (provided from the constructor) is a Stream.
-  sensor_ = new DFRobot_HumanDetection(uart_parent_);
+  // Create the sensor object by casting the UART component to a Stream pointer.
+  sensor_ = new DFRobot_HumanDetection(reinterpret_cast<Stream*>(uart_parent_));
   if (!sensor_->begin()) {
     ESP_LOGE(TAG, "Failed to initialize DFRobot C1001 Sensor!");
   } else {
@@ -19,20 +18,19 @@ void DFRobotC1001Component::setup() {
 }
 
 void DFRobotC1001Component::loop() {
-  // Not needed: the DFRobot_HumanDetection library uses blocking calls in update()
-  // Alternatively, you could leave this empty.
+  // Not needed in this blocking-command implementation.
+  // The sensor functions are called synchronously from update().
 }
 
 void DFRobotC1001Component::update() {
-  // Update at most once per second (adjust as needed).
+  // Limit updates to at most once per second.
   uint32_t now = millis();
-  if (now - last_read_time_ < 1000)
-    return;
+  if (now - last_read_time_ < 1000) return;
   last_read_time_ = now;
 
   ESP_LOGI(TAG, "Updating DFRobot C1001 sensor data...");
 
-  // Query the sensor for data. These functions internally call getData() with proper parameters.
+  // Query the sensor for data.
   int presence = sensor_->smHumanData(DFRobot_HumanDetection::eHumanPresence);
   int movement = sensor_->smHumanData(DFRobot_HumanDetection::eHumanMovement);
   int fall_state = sensor_->getFallData(DFRobot_HumanDetection::eFallState);
@@ -41,7 +39,7 @@ void DFRobotC1001Component::update() {
   ESP_LOGI(TAG, "Presence: %d, Movement: %d, Fall: %d, Residency: %d",
            presence, movement, fall_state, residency_state);
 
-  // Publish sensor states if the corresponding sensor objects have been set.
+  // Publish sensor states if configured.
   if (human_presence_sensor != nullptr) {
     human_presence_sensor->publish_state(presence);
   }

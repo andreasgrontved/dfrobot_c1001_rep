@@ -9,7 +9,7 @@ namespace dfrobot_c1001 {
 
 class DFRobotC1001Component : public PollingComponent, public uart::UARTDevice {
  public:
-  // Constructor: Save the UART component pointer.
+  // Constructor: We store the pointer to the UART component for later use.
   DFRobotC1001Component(uart::UARTComponent *uart)
       : uart::UARTDevice(uart), uart_parent_(uart) {}
 
@@ -23,17 +23,17 @@ class DFRobotC1001Component : public PollingComponent, public uart::UARTDevice {
   sensor::Sensor *fall_state_sensor{nullptr};
   sensor::Sensor *residency_state_sensor{nullptr};
 
-  // Setter methods called by code-generation.
+  // Setter methods used by the code generator.
   void set_human_presence(sensor::Sensor *sensor) { human_presence_sensor = sensor; }
   void set_human_movement(sensor::Sensor *sensor) { human_movement_sensor = sensor; }
   void set_fall_state(sensor::Sensor *sensor) { fall_state_sensor = sensor; }
   void set_residency_state(sensor::Sensor *sensor) { residency_state_sensor = sensor; }
 
  private:
-  // Pointer to the sensor instance from the DFRobot_HumanDetection library.
+  // Pointer to the DFRobot_HumanDetection sensor (allocated in setup()).
   DFRobot_HumanDetection *sensor_{nullptr};
 
-  // Store the UART component provided in the constructor.
+  // Store the UART component pointer.
   uart::UARTComponent *uart_parent_;
 
   uint32_t last_read_time_{0};

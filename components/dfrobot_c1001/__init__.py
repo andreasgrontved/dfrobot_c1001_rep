@@ -23,8 +23,8 @@ DFROBOT_C1001_SENSOR_SCHEMA = cv.Schema({
     cv.Optional("residency_state"): sensor.sensor_schema(),
 })
 
-# The overall configuration schema: the user sets the component ID, UART settings,
-# and optionally provides sensor configurations for each reading.
+# Overall configuration schema: the user sets the component ID, UART settings,
+# and optionally provides sensor configurations.
 CONFIG_SCHEMA = cv.COMPONENT_SCHEMA.extend({
     cv.GenerateID(): cv.declare_id(DFRobotC1001Component),
 }).extend(uart.UART_DEVICE_SCHEMA).extend(DFROBOT_C1001_SENSOR_SCHEMA)
