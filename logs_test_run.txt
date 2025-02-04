@@ -1,0 +1,235 @@
+INFO ESPHome 2024.12.4
+INFO Reading configuration /config/esphome/test.yaml...
+INFO Generating C++ source...
+INFO Updating https://github.com/espressif/esp-protocols.git@mdns-v1.3.2
+INFO Compiling app...
+Processing esp32-c6-device (board: esp32-c6-devkitc-1; framework: espidf; platform: https://github.com/pioarduino/platform-espressif32.git#51.03.07)
+--------------------------------------------------------------------------------
+Library Manager: Installing esphome/noise-c @ 0.1.6
+INFO Installing esphome/noise-c @ 0.1.6
+Unpacking  [####################################]  100%
+Library Manager: noise-c@0.1.6 has been installed!
+INFO noise-c@0.1.6 has been installed!
+Library Manager: Resolving dependencies...
+INFO Resolving dependencies...
+Library Manager: Installing esphome/libsodium @ 1.10018.4
+INFO Installing esphome/libsodium @ 1.10018.4
+Unpacking  [####################################]  100%          
+Library Manager: libsodium@1.10018.4 has been installed!
+INFO libsodium@1.10018.4 has been installed!
+HARDWARE: ESP32C6 160MHz, 320KB RAM, 8MB Flash
+ - framework-espidf @ 3.50105.0 (5.1.5) 
+ - tool-cmake @ 3.21.3 
+ - tool-esptoolpy @ 4.8.1 
+ - tool-mklittlefs @ 3.2.0 
+ - tool-ninja @ 1.7.1 
+ - tool-riscv32-esp-elf-gdb @ 12.1.0+20221002 
+ - tool-xtensa-esp-elf-gdb @ 12.1.0+20221002 
+ - toolchain-esp32ulp @ 2.35.0-20220830 
+ - toolchain-riscv32-esp @ 12.2.0+20230208
+Creating a new virtual environment for IDF Python dependencies
+Installing ESP-IDF's Python dependencies
+Collecting wheel>=0.35.1
+  Downloading wheel-0.45.1-py3-none-any.whl (72 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 72.5/72.5 kB 638.5 kB/s eta 0:00:00
+Collecting urllib3<2
+  Downloading urllib3-1.26.20-py2.py3-none-any.whl (144 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 144.2/144.2 kB 7.8 MB/s eta 0:00:00
+Collecting cryptography~=41.0.1
+  Downloading cryptography-41.0.7-cp37-abi3-manylinux_2_28_x86_64.whl (4.4 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.4/4.4 MB 7.9 MB/s eta 0:00:00
+Collecting future>=0.18.3
+  Downloading future-1.0.0-py3-none-any.whl (491 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 491.3/491.3 kB 8.6 MB/s eta 0:00:00
+Collecting pyparsing<4,>=3.1.0
+  Downloading pyparsing-3.2.1-py3-none-any.whl (107 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 107.7/107.7 kB 9.4 MB/s eta 0:00:00
+Collecting kconfiglib~=14.1.0
+  Downloading kconfiglib-14.1.0-py2.py3-none-any.whl (145 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 145.9/145.9 kB 9.6 MB/s eta 0:00:00
+Collecting idf-component-manager~=2.0.1
+  Downloading idf_component_manager-2.0.4-py3-none-any.whl (151 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 151.3/151.3 kB 9.3 MB/s eta 0:00:00
+Collecting esp-idf-kconfig<2.0.0,>=1.4.2
+  Downloading esp_idf_kconfig-1.5.0-py3-none-any.whl (44 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 44.9/44.9 kB 7.9 MB/s eta 0:00:00
+Collecting cffi>=1.12
+  Downloading cffi-1.17.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (467 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 467.2/467.2 kB 6.9 MB/s eta 0:00:00
+Collecting click
+  Downloading click-8.1.8-py3-none-any.whl (98 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 98.2/98.2 kB 6.5 MB/s eta 0:00:00
+Collecting colorama
+  Downloading colorama-0.4.6-py2.py3-none-any.whl (25 kB)
+Collecting pyyaml
+  Downloading PyYAML-6.0.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (762 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 763.0/763.0 kB 8.3 MB/s eta 0:00:00
+Collecting requests
+  Downloading requests-2.32.3-py3-none-any.whl (64 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 64.9/64.9 kB 7.2 MB/s eta 0:00:00
+Collecting requests-file
+  Downloading requests_file-2.1.0-py2.py3-none-any.whl (4.2 kB)
+Collecting requests-toolbelt
+  Downloading requests_toolbelt-1.0.0-py2.py3-none-any.whl (54 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 54.5/54.5 kB 8.8 MB/s eta 0:00:00
+Collecting tqdm
+  Downloading tqdm-4.67.1-py3-none-any.whl (78 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 78.5/78.5 kB 9.2 MB/s eta 0:00:00
+Collecting jsonref
+  Downloading jsonref-1.1.0-py3-none-any.whl (9.4 kB)
+Collecting pydantic
+  Downloading pydantic-2.10.6-py3-none-any.whl (431 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 431.7/431.7 kB 8.5 MB/s eta 0:00:00
+Collecting pydantic-core
+  Downloading pydantic_core-2.28.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.0 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.0/2.0 MB 8.9 MB/s eta 0:00:00
+Collecting pydantic-settings
+  Downloading pydantic_settings-2.7.1-py3-none-any.whl (29 kB)
+Collecting typing-extensions
+  Downloading typing_extensions-4.12.2-py3-none-any.whl (37 kB)
+Collecting pycparser
+  Downloading pycparser-2.22-py3-none-any.whl (117 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 117.6/117.6 kB 9.6 MB/s eta 0:00:00
+Collecting annotated-types>=0.6.0
+  Downloading annotated_types-0.7.0-py3-none-any.whl (13 kB)
+Collecting pydantic-core
+  Downloading pydantic_core-2.27.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.0 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.0/2.0 MB 8.4 MB/s eta 0:00:00
+Collecting python-dotenv>=0.21.0
+  Downloading python_dotenv-1.0.1-py3-none-any.whl (19 kB)
+Collecting charset-normalizer<4,>=2
+  Downloading charset_normalizer-3.4.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (143 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 143.9/143.9 kB 8.7 MB/s eta 0:00:00
+Collecting idna<4,>=2.5
+  Downloading idna-3.10-py3-none-any.whl (70 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 70.4/70.4 kB 7.6 MB/s eta 0:00:00
+Collecting certifi>=2017.4.17
+  Downloading certifi-2025.1.31-py3-none-any.whl (166 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 166.4/166.4 kB 9.9 MB/s eta 0:00:00
+Installing collected packages: wheel, urllib3, typing-extensions, tqdm, pyyaml, python-dotenv, pyparsing, pycparser, kconfiglib, jsonref, idna, future, colorama, click, charset-normalizer, certifi, annotated-types, requests, pydantic-core, esp-idf-kconfig, cffi, requests-toolbelt, requests-file, pydantic, cryptography, pydantic-settings, idf-component-manager
+Successfully installed annotated-types-0.7.0 certifi-2025.1.31 cffi-1.17.1 charset-normalizer-3.4.1 click-8.1.8 colorama-0.4.6 cryptography-41.0.7 esp-idf-kconfig-1.5.0 future-1.0.0 idf-component-manager-2.0.4 idna-3.10 jsonref-1.1.0 kconfiglib-14.1.0 pycparser-2.22 pydantic-2.10.6 pydantic-core-2.27.2 pydantic-settings-2.7.1 pyparsing-3.2.1 python-dotenv-1.0.1 pyyaml-6.0.2 requests-2.32.3 requests-file-2.1.0 requests-toolbelt-1.0.0 tqdm-4.67.1 typing-extensions-4.12.2 urllib3-1.26.20 wheel-0.45.1
+Reading CMake configuration...
+Generating assembly for certificate bundle...
+Dependency Graph
+|-- noise-c @ 0.1.6
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/api/api_connection.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/api/api_frame_helper.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/api/api_pb2.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/api/api_pb2_service.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/api/api_server.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/api/list_entities.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/api/proto.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/api/subscribe_state.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/api/user_services.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/captive_portal/captive_portal.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/custom/sensor/custom_sensor.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/esp32/core.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/esp32/gpio.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/esp32/preferences.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/esphome/ota/ota_esphome.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/logger/logger.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/logger/logger_esp32.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/logger/logger_esp8266.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/logger/logger_host.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/logger/logger_libretiny.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/logger/logger_rp2040.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/md5/md5.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/mdns/mdns_component.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/mdns/mdns_esp32.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/mdns/mdns_esp8266.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/mdns/mdns_host.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/mdns/mdns_libretiny.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/mdns/mdns_rp2040.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/network/util.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/ota/ota_backend.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/ota/ota_backend_arduino_esp32.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/ota/ota_backend_arduino_esp8266.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/ota/ota_backend_arduino_libretiny.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/ota/ota_backend_arduino_rp2040.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/ota/ota_backend_esp_idf.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/safe_mode/safe_mode.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/sensor/automation.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/sensor/filter.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/sensor/sensor.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/socket/bsd_sockets_impl.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/socket/lwip_raw_tcp_impl.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/socket/lwip_sockets_impl.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/socket/socket.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/uart/uart.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/uart/uart_component.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/uart/uart_component_esp32_arduino.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/uart/uart_component_esp8266.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/uart/uart_component_esp_idf.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/uart/uart_component_host.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/uart/uart_component_libretiny.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/uart/uart_component_rp2040.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/uart/uart_debugger.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/web_server_base/web_server_base.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/web_server_idf/utils.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/web_server_idf/web_server_idf.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/wifi/wifi_component.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/wifi/wifi_component_esp32_arduino.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/wifi/wifi_component_esp8266.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/wifi/wifi_component_esp_idf.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/wifi/wifi_component_libretiny.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/components/wifi/wifi_component_pico_w.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/core/application.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/core/color.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/core/component.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/core/component_iterator.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/core/controller.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/core/entity_base.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/core/helpers.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/core/log.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/core/ring_buffer.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/core/scheduler.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/core/string_ref.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/core/time.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/esphome/core/util.cpp.o
+Compiling .pioenvs/esp32-c6-device/src/main.cpp.o
+Generating LD script .pioenvs/esp32-c6-device/memory.ld
+Compiling .pioenvs/esp32-c6-device/app_trace/app_trace.c.o
+Compiling .pioenvs/esp32-c6-device/app_trace/app_trace_util.c.o
+Compiling .pioenvs/esp32-c6-device/app_trace/host_file_io.c.o
+Compiling .pioenvs/esp32-c6-device/app_trace/port/port_uart.c.o
+Compiling .pioenvs/esp32-c6-device/app_update/esp_ota_ops.c.o
+Archiving .pioenvs/esp32-c6-device/esp-idf/app_trace/libapp_trace.a
+Compiling .pioenvs/esp32-c6-device/app_update/esp_ota_app_desc.c.o
+Compiling .pioenvs/esp32-c6-device/bootloader_support/src/bootloader_common.c.o
+Compiling .pioenvs/esp32-c6-device/bootloader_support/src/bootloader_common_loader.c.o
+Archiving .pioenvs/esp32-c6-device/esp-idf/app_update/libapp_update.a
+Compiling .pioenvs/esp32-c6-device/bootloader_support/src/bootloader_clock_init.c.o
+Compiling .pioenvs/esp32-c6-device/bootloader_support/src/bootloader_mem.c.o
+Compiling .pioenvs/esp32-c6-device/bootloader_support/src/bootloader_random.c.o
+Compiling .pioenvs/esp32-c6-device/bootloader_support/src/bootloader_random_esp32c6.c.o
+Compiling .pioenvs/esp32-c6-device/bootloader_support/src/bootloader_efuse.c.o
+Compiling .pioenvs/esp32-c6-device/bootloader_support/src/flash_encrypt.c.o
+Compiling .pioenvs/esp32-c6-device/bootloader_support/src/secure_boot.c.o
+Compiling .pioenvs/esp32-c6-device/bootloader_support/bootloader_flash/src/bootloader_flash.c.o
+Compiling .pioenvs/esp32-c6-device/bootloader_support/bootloader_flash/src/flash_qio_mode.c.o
+Compiling .pioenvs/esp32-c6-device/bootloader_support/bootloader_flash/src/bootloader_flash_config_esp32c6.c.o
+Compiling .pioenvs/esp32-c6-device/bootloader_support/src/bootloader_utility.c.o
+Compiling .pioenvs/esp32-c6-device/bootloader_support/src/flash_partitions.c.o
+Compiling .pioenvs/esp32-c6-device/bootloader_support/src/esp_image_format.c.o
+/config/esphome/test.yaml: In lambda function:
+/config/esphome/test.yaml:50:35: error: 'dfrobot_c1001' in namespace 'esphome' does not name a type
+   50 |       auto dfrobot = new esphome::dfrobot_c1001::DFRobotC1001Component(id(uart_bus));
+      |                                   ^~~~~~~~~~~~~
+/config/esphome/test.yaml:57:7: error: could not convert '{<expression error>, <expression error>, <expression error>, <expression error>}' from '<brace-enclosed initializer list>' to 'std::vector<esphome::sensor::Sensor*>'
+   57 |       };
+      |       ^
+      |       |
+      |       <brace-enclosed initializer list>
+Compiling .pioenvs/esp32-c6-device/bootloader_support/src/idf/bootloader_sha.c.o
+Compiling .pioenvs/esp32-c6-device/cmock/CMock/src/cmock.c.o
+Compiling .pioenvs/esp32-c6-device/console/commands.c.o
+Archiving .pioenvs/esp32-c6-device/esp-idf/bootloader_support/libbootloader_support.a
+Compiling .pioenvs/esp32-c6-device/console/esp_console_repl.c.o
+Archiving .pioenvs/esp32-c6-device/esp-idf/cmock/libcmock.a
+Compiling .pioenvs/esp32-c6-device/console/split_argv.c.o
+Compiling .pioenvs/esp32-c6-device/console/linenoise/linenoise.c.o
+Compiling .pioenvs/esp32-c6-device/console/argtable3/arg_cmd.c.o
+Compiling .pioenvs/esp32-c6-device/console/argtable3/arg_date.c.o
+Compiling .pioenvs/esp32-c6-device/console/argtable3/arg_dbl.c.o
+*** [.pioenvs/esp32-c6-device/src/main.cpp.o] Error 1
+========================= [FAILED] Took 887.76 seconds =========================
