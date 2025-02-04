@@ -11,7 +11,12 @@
 
 #ifndef _DFROBOT_HUMAN_DETECTION_
 #define _DFROBOT_HUMAN_DETECTION_
-#include "Arduino.h"
+#ifdef ARDUINO
+  #include "Arduino.h"
+#else
+  // For non-Arduino environments (such as ESP-IDF via ESPHome), include an alternative header
+  #include "esphome/core/hal.h"
+#endif
 
 #if (defined ARDUINO_AVR_UNO) && (defined ESP8266)
 #include "SoftwareSerial.h"
