@@ -9,14 +9,15 @@ namespace dfrobot_c1001 {
 
 class DFRobotC1001Component : public PollingComponent, public uart::UARTDevice {
  public:
-  // Constructor: Pass the UART component (which acts as a Stream) to the base.
-  DFRobotC1001Component(uart::UARTComponent *uart) : uart::UARTDevice(uart) {}
+  // Constructor: Save the UART component pointer.
+  DFRobotC1001Component(uart::UARTComponent *uart)
+      : uart::UARTDevice(uart), uart_parent_(uart) {}
 
   void setup() override;
   void update() override;
-  void loop() override;  // Called continuously to process UART data
+  void loop() override;  // Not used in this example
 
-  // Sensor pointers that will be set via configuration.
+  // Sensor pointers that will be set via YAML configuration.
   sensor::Sensor *human_presence_sensor{nullptr};
   sensor::Sensor *human_movement_sensor{nullptr};
   sensor::Sensor *fall_state_sensor{nullptr};
@@ -29,8 +30,12 @@ class DFRobotC1001Component : public PollingComponent, public uart::UARTDevice {
   void set_residency_state(sensor::Sensor *sensor) { residency_state_sensor = sensor; }
 
  private:
-  // The sensor object from the DFRobot_HumanDetection library.
-  DFRobot_HumanDetection sensor_;
+  // Pointer to the sensor instance from the DFRobot_HumanDetection library.
+  DFRobot_HumanDetection *sensor_{nullptr};
+
+  // Store the UART component provided in the constructor.
+  uart::UARTComponent *uart_parent_;
+
   uint32_t last_read_time_{0};
 };
 

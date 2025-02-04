@@ -8,9 +8,10 @@ static const char *TAG = "dfrobot_c1001";
 
 void DFRobotC1001Component::setup() {
   ESP_LOGI(TAG, "Initializing DFRobot C1001 Sensor...");
-  // Initialize the sensor using 'this' (our UARTDevice) as the stream.
-  sensor_ = DFRobot_HumanDetection(this);
-  if (!sensor_.begin()) {
+  // Create the sensor object using the underlying UART component.
+  // We assume that uart_parent_ (provided from the constructor) is a Stream.
+  sensor_ = new DFRobot_HumanDetection(uart_parent_);
+  if (!sensor_->begin()) {
     ESP_LOGE(TAG, "Failed to initialize DFRobot C1001 Sensor!");
   } else {
     ESP_LOGI(TAG, "DFRobot C1001 Sensor initialized successfully.");
@@ -18,32 +19,29 @@ void DFRobotC1001Component::setup() {
 }
 
 void DFRobotC1001Component::loop() {
-  // Continuously process incoming UART data.
-  while (available()) {
-    uint8_t c;
-    read_byte(&c);
-    sensor_.getData(c);
-  }
+  // Not needed: the DFRobot_HumanDetection library uses blocking calls in update()
+  // Alternatively, you could leave this empty.
 }
 
 void DFRobotC1001Component::update() {
   // Update at most once per second (adjust as needed).
   uint32_t now = millis();
-  if (now - last_read_time_ < 1000) return;
+  if (now - last_read_time_ < 1000)
+    return;
   last_read_time_ = now;
 
   ESP_LOGI(TAG, "Updating DFRobot C1001 sensor data...");
 
-  // Read sensor values.
-  int presence = sensor_.smHumanData(DFRobot_HumanDetection::eHumanPresence);
-  int movement = sensor_.smHumanData(DFRobot_HumanDetection::eHumanMovement);
-  int fall_state = sensor_.getFallData(DFRobot_HumanDetection::eFallState);
-  int residency_state = sensor_.getStaticResidencyTime();
+  // Query the sensor for data. These functions internally call getData() with proper parameters.
+  int presence = sensor_->smHumanData(DFRobot_HumanDetection::eHumanPresence);
+  int movement = sensor_->smHumanData(DFRobot_HumanDetection::eHumanMovement);
+  int fall_state = sensor_->getFallData(DFRobot_HumanDetection::eFallState);
+  int residency_state = sensor_->getStaticResidencyTime();
 
   ESP_LOGI(TAG, "Presence: %d, Movement: %d, Fall: %d, Residency: %d",
            presence, movement, fall_state, residency_state);
 
-  // Publish each sensor's state if configured.
+  // Publish sensor states if the corresponding sensor objects have been set.
   if (human_presence_sensor != nullptr) {
     human_presence_sensor->publish_state(presence);
   }

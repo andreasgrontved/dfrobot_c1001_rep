@@ -15,7 +15,7 @@ DFRobotC1001Component = dfrobot_c1001_ns.class_(
     "DFRobotC1001Component", cg.Component, uart.UARTDevice
 )
 
-# Define the sensor configuration schema for our component.
+# Define a schema for the sensor configurations.
 DFROBOT_C1001_SENSOR_SCHEMA = cv.Schema({
     cv.Optional("human_presence"): sensor.sensor_schema(),
     cv.Optional("human_movement"): sensor.sensor_schema(),
@@ -23,18 +23,17 @@ DFROBOT_C1001_SENSOR_SCHEMA = cv.Schema({
     cv.Optional("residency_state"): sensor.sensor_schema(),
 })
 
-# Main configuration schema: the user sets the ID, UART configuration, and optionally provides sensor configs.
+# The overall configuration schema: the user sets the component ID, UART settings,
+# and optionally provides sensor configurations for each reading.
 CONFIG_SCHEMA = cv.COMPONENT_SCHEMA.extend({
     cv.GenerateID(): cv.declare_id(DFRobotC1001Component),
 }).extend(uart.UART_DEVICE_SCHEMA).extend(DFROBOT_C1001_SENSOR_SCHEMA)
 
 async def to_code(config):
-    # Create the component instance.
     var = cg.new_Pvariable(config[CONF_ID])
     await cg.register_component(var, config)
     await uart.register_uart_device(var, config)
 
-    # For each sensor provided in the YAML, create a sensor and assign it via a setter.
     if "human_presence" in config:
         sens = await sensor.new_sensor(config["human_presence"])
         cg.add(var.set_human_presence(sens))
