@@ -1,0 +1,62 @@
+esphome:
+  name: esp32-c6-device
+  platformio_options:
+    board_build.flash_mode: dio
+
+esp32:
+  board: esp32-c6-devkitc-1
+  framework:
+    type: esp-idf
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "WL4hwSzOgpYDu0hNQ/oj+/Cj7dG8s4/vVpQLFIVDfoY="
+
+ota:
+  - platform: esphome
+    password: "b9b085f1809f12c0670685214af021ba"
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Test Fallback Hotspot"
+    password: "SJ0Imr2g55fz"
+
+captive_portal:
+
+external_components:
+  - source:
+      type: git
+      url: https://github.com/andreasgrontved/dfrobot_c1001_rep
+      ref: main
+    components: [dfrobot_c1001]
+
+uart:
+  id: uart_bus
+  tx_pin: GPIO1
+  rx_pin: GPIO3
+  baud_rate: 115200
+
+sensor:
+  - platform: custom
+    lambda: |-
+      auto dfrobot = new esphome::dfrobot_c1001::DFRobotC1001Component(id(uart_bus));
+      App.register_component(dfrobot);
+      return {
+          dfrobot->human_presence_sensor,
+          dfrobot->human_movement_sensor,
+          dfrobot->fall_state_sensor,
+          dfrobot->residency_state_sensor,
+      };
+    sensors:
+      - name: "Human Presence"
+      - name: "Human Movement"
+      - name: "Fall State"
+      - name: "Stationary Dwell"
