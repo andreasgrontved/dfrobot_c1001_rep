@@ -1,24 +1,23 @@
 esphome:
-  name: esp32-c6-device
-  platformio_options:
-    board_build.flash_mode: dio
+  name: esphome-web-f44354
+  friendly_name: esp-wroom-32
+  min_version: 2024.11.0
+  name_add_mac_suffix: false
 
 esp32:
-  board: esp32-c6-devkitc-1
+  board: esp32dev
   framework:
-    type: esp-idf
+    type: arduino
 
 # Enable logging
 logger:
 
 # Enable Home Assistant API
 api:
-  encryption:
-    key: "WL4hwSzOgpYDu0hNQ/oj+/Cj7dG8s4/vVpQLFIVDfoY="
 
+# Allow Over-The-Air updates
 ota:
-  - platform: esphome
-    password: "b9b085f1809f12c0670685214af021ba"
+- platform: esphome
 
 wifi:
   ssid: !secret wifi_ssid
@@ -28,8 +27,6 @@ wifi:
   ap:
     ssid: "Test Fallback Hotspot"
     password: "SJ0Imr2g55fz"
-
-captive_portal:
 
 external_components:
   - source:
@@ -44,19 +41,18 @@ uart:
   rx_pin: GPIO3
   baud_rate: 115200
 
-sensor:
-  - platform: custom
-    lambda: |-
-      auto dfrobot = new esphome::dfrobot_c1001::DFRobotC1001Component(id(uart_bus));
-      App.register_component(dfrobot);
-      return {
-          dfrobot->human_presence_sensor,
-          dfrobot->human_movement_sensor,
-          dfrobot->fall_state_sensor,
-          dfrobot->residency_state_sensor,
-      };
-    sensors:
-      - name: "Human Presence"
-      - name: "Human Movement"
-      - name: "Fall State"
-      - name: "Stationary Dwell"
+dfrobot_c1001:
+  id: dfrobot_sensor
+  uart_id: uart_bus
+  human_presence:
+    name: "Human Presence"
+    id: human_presence
+  human_movement:
+    name: "Human Movement"
+    id: human_movement
+  fall_state:
+    name: "Fall State"
+    id: fall_state
+  residency_state:
+    name: "Stationary Dwell"
+    id: residency_state
