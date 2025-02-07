@@ -7,33 +7,22 @@ namespace esphome {
 namespace dfrobot_c1001 {
 
 class DFRobotC1001Component : public PollingComponent, public uart::UARTDevice {
- public:
-  DFRobotC1001Component(uart::UARTComponent *uart);
+public:
+    DFRobotC1001Component(uart::UARTComponent *parent) : uart::UARTDevice(parent) {}
 
-  void setup() override;
-  void update() override;
-  void loop() override {}
+    void setup() override;
+    void update() override;
 
-  // Sensor objects
-  sensor::Sensor *human_presence_sensor{nullptr};
-  sensor::Sensor *human_movement_sensor{nullptr};
-  sensor::Sensor *fall_state_sensor{nullptr};
-  sensor::Sensor *residency_state_sensor{nullptr};
+    void set_human_presence(sensor::Sensor *s) { human_presence_ = s; }
+    void set_human_movement(sensor::Sensor *s) { human_movement_ = s; }
+    void set_fall_state(sensor::Sensor *s) { fall_state_ = s; }
+    void set_residency_state(sensor::Sensor *s) { residency_state_ = s; }
 
-  void set_human_presence(sensor::Sensor *sensor) { human_presence_sensor = sensor; }
-  void set_human_movement(sensor::Sensor *sensor) { human_movement_sensor = sensor; }
-  void set_fall_state(sensor::Sensor *sensor) { fall_state_sensor = sensor; }
-  void set_residency_state(sensor::Sensor *sensor) { residency_state_sensor = sensor; }
-
- private:
-  // Internal function for communicating with the sensor
-  bool get_sensor_data(uint8_t command, uint8_t *response, uint8_t response_size);
-
-  // Extracted functions from DFRobot_HumanDetection
-  int read_human_presence();
-  int read_human_movement();
-  int read_fall_state();
-  int read_residency_state();
+protected:
+    sensor::Sensor *human_presence_{nullptr};
+    sensor::Sensor *human_movement_{nullptr};
+    sensor::Sensor *fall_state_{nullptr};
+    sensor::Sensor *residency_state_{nullptr};
 };
 
 }  // namespace dfrobot_c1001
