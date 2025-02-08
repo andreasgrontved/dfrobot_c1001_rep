@@ -2,21 +2,20 @@
 
 #include "esphome.h"
 #include "esphome/components/uart/uart.h"
-#include "DFRobot_HumanDetection.h"  // Include the original DFRobot library header
+#include "DFRobot_HumanDetection.h"  // Include the DFRobot library header
 
 namespace esphome {
 namespace dfrobot_c1001 {
 
 class DFRobotC1001Component : public PollingComponent, public uart::UARTDevice {
  public:
-  // Pass the UART component pointer to the parent and initialize the library.
+  // Cast 'this' to Stream* to match the expected constructor parameter
   DFRobotC1001Component(uart::UARTComponent *parent)
-      : uart::UARTDevice(parent), sensor_(this) {}
+      : uart::UARTDevice(parent), sensor_(static_cast<Stream*>(this)) {}
 
   void setup() override;
   void update() override;
 
-  // Setters for the sensor outputs
   void set_human_presence(sensor::Sensor *s) { human_presence_ = s; }
   void set_human_movement(sensor::Sensor *s) { human_movement_ = s; }
   void set_fall_state(sensor::Sensor *s) { fall_state_ = s; }
@@ -28,7 +27,6 @@ class DFRobotC1001Component : public PollingComponent, public uart::UARTDevice {
   sensor::Sensor *fall_state_{nullptr};
   sensor::Sensor *residency_state_{nullptr};
 
-  // Instance of the DFRobot_HumanDetection library.
   DFRobot_HumanDetection sensor_;
 };
 
