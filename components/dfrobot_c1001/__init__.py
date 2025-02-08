@@ -4,26 +4,25 @@ from esphome.components import uart, sensor
 from esphome.const import CONF_ID
 
 DEPENDENCIES = ["uart"]
-AUTO_LOAD = ["uart", "sensor"]
 
-# Create a new namespace for your component.
+# Create a namespace for our component.
 dfrobot_c1001_ns = cg.esphome_ns.namespace("dfrobot_c1001")
 DFRobotC1001Component = dfrobot_c1001_ns.class_(
     "DFRobotC1001Component", cg.Component, uart.UARTDevice
 )
 
-CONFIG_SCHEMA = cv.COMPONENT_SCHEMA.extend({
+CONFIG_SCHEMA = cv.Schema({
     cv.GenerateID(): cv.declare_id(DFRobotC1001Component),
     cv.Required("uart_id"): cv.use_id(uart.UARTComponent),
     cv.Optional("human_presence"): sensor.sensor_schema(),
     cv.Optional("human_movement"): sensor.sensor_schema(),
     cv.Optional("fall_state"): sensor.sensor_schema(),
     cv.Optional("residency_state"): sensor.sensor_schema(),
-})
+}).extend(cv.COMPONENT_SCHEMA).extend(uart.UART_DEVICE_SCHEMA)
 
 async def to_code(config):
-    uart_var = await cg.get_variable(config["uart_id"])  
-    var = cg.new_Pvariable(config[CONF_ID], uart_var)  
+    uart_var = await cg.get_variable(config["uart_id"])
+    var = cg.new_Pvariable(config[CONF_ID], uart_var)
     await cg.register_component(var, config)
     await uart.register_uart_device(var, config)
 
