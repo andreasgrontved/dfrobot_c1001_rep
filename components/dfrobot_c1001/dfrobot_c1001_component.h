@@ -1,4 +1,6 @@
 #pragma once
+#pragma message("Using updated dfrobot_c1001_component.h with static_cast<Stream*>(this)")
+
 
 #include "esphome/core/component.h"
 #include "esphome/components/uart/uart.h"
