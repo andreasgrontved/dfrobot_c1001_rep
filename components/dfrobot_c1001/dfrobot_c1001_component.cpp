@@ -6,52 +6,53 @@ namespace dfrobot_c1001 {
 static const char *TAG = "dfrobot_c1001";
 
 void DFRobotC1001Component::setup() {
-    ESP_LOGI(TAG, "Initializing DFRobot C1001 Sensor...");
-    this->write_str("\xA5\x55\x00\x00\xAA"); // Reset sensor
-    delay(500);
-    ESP_LOGI(TAG, "Sensor initialization complete.");
+  ESP_LOGI(TAG, "Initializing DFRobot C1001 Sensor...");
+
+  // Reset the sensor (as recommended by the library)
+  if (sensor_.sensorRet() != 0) {
+    ESP_LOGW(TAG, "Sensor reset failed");
+  } else {
+    ESP_LOGI(TAG, "Sensor reset successful");
+  }
+  
+  // (You may wish to reduce this delay from 10 s to something shorter if possible)
+  delay(1000);
+
+  // Initialize the sensor – the library’s begin() waits for a long startup time.
+  if (sensor_.begin() != 0) {
+    ESP_LOGE(TAG, "Sensor initialization failed");
+  } else {
+    ESP_LOGI(TAG, "Sensor initialization successful");
+  }
+
+  // Set sensor to falling detection mode.
+  if (sensor_.configWorkMode(DFRobot_HumanDetection::eFallingMode) != 0) {
+    ESP_LOGE(TAG, "Failed to set sensor work mode");
+  } else {
+    ESP_LOGI(TAG, "Sensor work mode set to falling mode");
+  }
 }
 
 void DFRobotC1001Component::update() {
-    ESP_LOGI(TAG, "Reading DFRobot C1001 sensor data...");
+  ESP_LOGI(TAG, "Reading DFRobot C1001 sensor data...");
 
-    std::vector<uint8_t> buffer;
-    while (this->available()) {
-        buffer.push_back(this->read());
-    }
+  // Get sensor values using the library functions.
+  // (In the Arduino sample, these functions return 0/1 or data values.)
+  uint16_t presence = sensor_.smHumanData(DFRobot_HumanDetection::eHumanPresence);
+  uint16_t movement = sensor_.smHumanData(DFRobot_HumanDetection::eHumanMovement);
+  uint16_t fall     = sensor_.getFallData(DFRobot_HumanDetection::eFallState);
+  uint16_t residency = sensor_.getFallData(DFRobot_HumanDetection::estaticResidencyState);
 
-    if (buffer.empty()) {
-        ESP_LOGW(TAG, "No data received from sensor");
-        return;
-    }
+  ESP_LOGI(TAG, "Presence: %d, Movement: %d, Fall: %d, Residency: %d", presence, movement, fall, residency);
 
-    ESP_LOGI(TAG, "Raw data received: %d bytes", buffer.size());
-    for (size_t i = 0; i < buffer.size(); i++) {
-        ESP_LOGI(TAG, "Byte %d: 0x%02X", i, buffer[i]);
-    }
-
-    // Ensure at least 8 bytes are available
-    if (buffer.size() < 8) {
-        ESP_LOGW(TAG, "Not enough data received from sensor");
-        return;
-    }
-
-    uint8_t presence = buffer[0];
-    uint8_t movement = buffer[1];
-    uint8_t fall = buffer[2];
-    uint8_t residency = buffer[3];
-
-    ESP_LOGI(TAG, "Presence: %d, Movement: %d, Fall: %d, Residency: %d",
-             presence, movement, fall, residency);
-
-    if (this->human_presence_ != nullptr)
-        this->human_presence_->publish_state(presence);
-    if (this->human_movement_ != nullptr)
-        this->human_movement_->publish_state(movement);
-    if (this->fall_state_ != nullptr)
-        this->fall_state_->publish_state(fall);
-    if (this->residency_state_ != nullptr)
-        this->residency_state_->publish_state(residency);
+  if (human_presence_ != nullptr)
+    human_presence_->publish_state(presence);
+  if (human_movement_ != nullptr)
+    human_movement_->publish_state(movement);
+  if (fall_state_ != nullptr)
+    fall_state_->publish_state(fall);
+  if (residency_state_ != nullptr)
+    residency_state_->publish_state(residency);
 }
 
 }  // namespace dfrobot_c1001
