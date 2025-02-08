@@ -11,7 +11,8 @@ class DFRobotC1001Component : public uart::UARTDevice, public Component {
  public:
   // Constructor: Cast 'this' to Stream* so that DFRobot_HumanDetection receives a Stream pointer.
   DFRobotC1001Component(uart::UARTComponent *parent)
-      : uart::UARTDevice(parent), sensor_() {}
+    : uart::UARTDevice(parent), sensor_(static_cast<Stream*>(this)) {}
+
 
   void setup() override;
   void update() override;
