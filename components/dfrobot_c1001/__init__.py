@@ -6,6 +6,7 @@ from esphome.const import CONF_ID
 DEPENDENCIES = ["uart"]
 AUTO_LOAD = ["uart", "sensor"]
 
+# Create a new namespace for your component.
 dfrobot_c1001_ns = cg.esphome_ns.namespace("dfrobot_c1001")
 DFRobotC1001Component = dfrobot_c1001_ns.class_(
     "DFRobotC1001Component", cg.Component, uart.UARTDevice
